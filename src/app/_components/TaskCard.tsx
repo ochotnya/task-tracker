@@ -11,7 +11,6 @@ import {
   CardTitle,
 } from '~/shadcn/ui/card'
 import { Button } from '~/shadcn/ui/button'
-import { Tooltip, TooltipContent, TooltipTrigger } from '~/shadcn/ui/tooltip'
 
 type Props = {
   data: JiraTask
@@ -101,7 +100,7 @@ const TaskCard = ({ data }: Props) => {
 
   return (
     <Card
-      className={`w-[440px] h-[400px] border-none ${
+      className={` h-[300px] min-w-[320px] border-none ${
         data.isActive ? 'bg-green-600' : 'bg-gray-400'
       }`}
     >
@@ -140,7 +139,7 @@ const TaskCard = ({ data }: Props) => {
         </div>
         <div
           ref={ref}
-          className="grid gap-2 grid-cols-6 mt-2 w-full max-h-[150px] overflow-hidden overflow-y-scroll"
+          className="flex mt-2 flex-wrap gap-2 w-full max-h-[150px] overflow-hidden overflow-y-scroll"
         >
           {data.activity.map((activity, i) => (
             <ActivitySegment activity={activity} key={i} />
