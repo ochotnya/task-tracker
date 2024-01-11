@@ -101,7 +101,7 @@ const TaskCard = ({ data }: Props) => {
 
   return (
     <Card
-      className={`w-[440px] h-[300px] border-none ${
+      className={`w-[440px] h-[400px] border-none ${
         data.isActive ? 'bg-green-600' : 'bg-gray-400'
       }`}
     >
