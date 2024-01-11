@@ -4,7 +4,7 @@ import './globals.css'
 import { cn } from '~/lib/utils'
 import { TooltipProvider } from '~/shadcn/ui/tooltip'
 
-export const fontSans = Inter({
+const fontSans = Inter({
   subsets: ['latin'],
   variable: '--font-sans',
 })
