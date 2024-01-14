@@ -1,5 +1,5 @@
-import { DateTime } from 'luxon'
-import React, { useEffect, useRef } from 'react'
+import { DateTime, Duration } from 'luxon'
+import React, { useCallback, useEffect, useRef } from 'react'
 import ActivitySegment from '~/app/_components/ActivitySegment'
 import { Activity, JiraTask, useAppContext } from '~/app/_components/AppContext'
 import { FaTrashAlt, FaPlay, FaStop } from 'react-icons/fa'
@@ -21,8 +21,19 @@ const disabledButtonClassName = 'text-black bg-gray-500'
 const TaskCard = ({ data }: Props) => {
   const { appData, saveData } = useAppContext()
   const ref = useRef<HTMLDivElement>(null)
+  const timeSum = data.activity.reduce((prev, current) => {
+    if (!current.end) {
+      return prev
+    }
 
-  const activate = () => {
+    const duration = DateTime.fromISO(current.end)
+      .diff(DateTime.fromISO(current.start))
+      .as('milliseconds')
+
+    return prev + duration
+  }, 0)
+
+  const activate = useCallback(() => {
     const newTaskArray = appData.tasks.map((task) => {
       const activities = task.activity
 
@@ -58,9 +69,9 @@ const TaskCard = ({ data }: Props) => {
     })
 
     saveData({ ...appData, tasks: newTaskArray })
-  }
+  }, [appData, data.name, saveData])
 
-  const stopSelected = () => {
+  const stopSelected = useCallback(() => {
     const newTaskArray = appData.tasks.map((task) => {
       const activities = task.activity
 
@@ -84,7 +95,7 @@ const TaskCard = ({ data }: Props) => {
     })
 
     saveData({ ...appData, tasks: newTaskArray })
-  }
+  }, [saveData, appData, data.name])
 
   const remove = () => {
     const tasks = appData.tasks.filter((task) => task.name !== data.name)
@@ -106,7 +117,10 @@ const TaskCard = ({ data }: Props) => {
     >
       <CardHeader className="pb-2">
         <CardTitle>{data.name}</CardTitle>
-        <CardDescription className="text-black">Czas (suma): 7</CardDescription>
+        <CardDescription className="text-black">
+          Czas (suma): {Duration.fromDurationLike(timeSum).toFormat('hh:mm')}{' '}
+          [h]
+        </CardDescription>
       </CardHeader>
       <CardContent>
         <div className="flex gap-2">

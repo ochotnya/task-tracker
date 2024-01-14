@@ -1,4 +1,4 @@
-import { DateTime } from 'luxon'
+import { DateTime, Duration } from 'luxon'
 import React from 'react'
 import { Activity } from '~/app/_components/AppContext'
 import { Badge } from '~/shadcn/ui/badge'
@@ -12,7 +12,9 @@ const ActivitySegment = ({ activity }: Props) => {
   const start = DateTime.fromISO(activity.start)
 
   const duration = activity.end
-    ? DateTime.fromISO(activity.end).diff(start).toFormat('hh:mm')
+    ? Duration.fromDurationLike(
+        DateTime.fromISO(activity.end).diff(start).as('milliseconds'),
+      ).toFormat('hh:mm')
     : 'trwa'
 
   return (
@@ -23,9 +25,11 @@ const ActivitySegment = ({ activity }: Props) => {
         </Badge>
       </TooltipTrigger>
       <TooltipContent>
-        <p>Start: {start.toFormat('dd-MM-yyyy HH:mm')}</p>
         <p>
-          Stop:{' '}
+          <strong>Start:</strong> {start.toFormat('dd-MM-yyyy HH:mm')}
+        </p>
+        <p>
+          <strong>Stop:</strong>{' '}
           {activity.end
             ? DateTime.fromISO(activity.end).toFormat('dd-MM-yyyy HH:mm')
             : '-'}
