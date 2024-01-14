@@ -14,7 +14,7 @@ const ActivitySegment = ({ activity }: Props) => {
   const duration = activity.end
     ? Duration.fromDurationLike(
         DateTime.fromISO(activity.end).diff(start).as('milliseconds'),
-      ).toFormat('hh:mm')
+      ).toFormat('hh:mm:ss')
     : 'trwa'
 
   return (

@@ -2,7 +2,7 @@ import { DateTime, Duration } from 'luxon'
 import React, { useCallback, useEffect, useRef } from 'react'
 import ActivitySegment from '~/app/_components/ActivitySegment'
 import { Activity, JiraTask, useAppContext } from '~/app/_components/AppContext'
-import { FaTrashAlt, FaPlay, FaStop } from 'react-icons/fa'
+import { FaPlay, FaStop } from 'react-icons/fa'
 import {
   Card,
   CardContent,
@@ -11,6 +11,7 @@ import {
   CardTitle,
 } from '~/shadcn/ui/card'
 import { Button } from '~/shadcn/ui/button'
+import DeleteModal from '~/app/_components/DeleteModal'
 
 type Props = {
   data: JiraTask
@@ -144,12 +145,7 @@ const TaskCard = ({ data }: Props) => {
           >
             <FaStop />
           </Button>
-          <Button
-            className="flex w-20 p-2 justify-center items-center bg-red-700 text-white"
-            onClick={remove}
-          >
-            <FaTrashAlt />
-          </Button>
+          <DeleteModal deleteHandler={remove} />
         </div>
         <div
           ref={ref}
