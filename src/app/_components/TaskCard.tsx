@@ -1,7 +1,7 @@
 import { DateTime, Duration } from 'luxon'
 import React, { useCallback, useEffect, useRef } from 'react'
 import ActivitySegment from '~/app/_components/ActivitySegment'
-import { Activity, JiraTask, useAppContext } from '~/app/_components/AppContext'
+import { Activity, TaskData, useAppContext } from '~/app/_components/AppContext'
 import { FaPlay, FaStop } from 'react-icons/fa'
 import {
   Card,
@@ -14,7 +14,7 @@ import { Button } from '~/shadcn/ui/button'
 import DeleteModal from '~/app/_components/DeleteModal'
 
 type Props = {
-  data: JiraTask
+  data: TaskData
 }
 
 const disabledButtonClassName = 'text-black bg-gray-500'

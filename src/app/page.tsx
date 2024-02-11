@@ -1,6 +1,7 @@
 import AddTask from '~/app/_components/AddTask'
 import AppContextProvider from '~/app/_components/AppContext'
 import TasksList from '~/app/_components/TasksList'
+import Chart from '~/app/_components/chart/Chart'
 
 export default function Home() {
   return (
@@ -11,6 +12,7 @@ export default function Home() {
         </div>
 
         <TasksList />
+        <Chart />
       </AppContextProvider>
     </main>
   )

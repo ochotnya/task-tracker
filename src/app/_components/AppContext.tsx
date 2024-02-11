@@ -13,14 +13,14 @@ export type Activity = {
   end?: string
 }
 
-export type JiraTask = {
+export type TaskData = {
   name: string
   isActive: boolean
   activity: Activity[]
 }
 
 type AppData = {
-  tasks: JiraTask[]
+  tasks: TaskData[]
 }
 type AppContextType = {
   appData: AppData
