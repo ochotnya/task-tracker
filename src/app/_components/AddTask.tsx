@@ -1,7 +1,7 @@
 'use client'
 
 import React from 'react'
-import { JiraTask, useAppContext } from '~/app/_components/AppContext'
+import { TaskData, useAppContext } from '~/app/_components/AppContext'
 import { Button } from '~/shadcn/ui/button'
 import { Input } from '~/shadcn/ui/input'
 
@@ -15,7 +15,7 @@ const AddTask = () => {
 
     input.value = ''
 
-    const newTask: JiraTask = {
+    const newTask: TaskData = {
       name,
       activity: [],
       isActive: false,
